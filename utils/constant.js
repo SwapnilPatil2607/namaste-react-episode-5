@@ -1,21 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-// food ordering app (reference from swiggy app)
-
-// steps
-// 1. planing , if planing is good code creation is easy
-// 2. make wireframe
-// 3. list down the components we have to make (reusable and non-reusable)
-
-// component list
-// 1. header navigator
-// 2. Body comp
-//     - card component inside body component
-//         -img and info
-// 3. footer (copyright links)
-
-const hardCodedData = [
+// NAMED export also
+export const hardCodedData = [
   {
     info: {
       id: "68532",
@@ -1433,75 +1417,3 @@ const hardCodedData = [
     },
   },
 ];
-const Header = () => {
-  return (
-    <div className="header">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqgqV9sezgYxiiPqaJ3NXXvwDbkzgXpCeBWQ&usqp=CAU" />
-      <div>
-        <ul>
-          <li>Home</li>
-          <li>contact</li>
-          <li>about</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
-
-const styleCard = {
-  borderRadius: "10px",
-};
-
-// Making the card component dynamic with the help of PROPS
-// props(properties) is basically argument passed in functional components
-const Card = ({ resData }) => {
-  const { info } = resData;
-  const { name, cuisines, avgRatingString } = info;
-  return (
-    <div className="res-card" style={styleCard}>
-      <img
-        src={
-          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-          info.cloudinaryImageId
-        }
-      />
-      <h3>{name}</h3>
-      <p>cusines: {cuisines.join(",")}</p>
-      <p>rating: {avgRatingString}</p>
-      <p>delivery time: {info?.sla?.deliveryTime} min </p>
-    </div>
-  );
-};
-
-const Body = () => {
-  return (
-    <div className="container">
-      <input type="text" placeholder="Search Places" />
-      <div className="cards">
-        {/* giving key prop or attribute so comp is uniquely represented  */}
-        {/* if there is one more item is added in data key is helpful then  */}
-        {hardCodedData.map((restaurant) => (
-          <Card key={restaurant.info.id} resData={restaurant} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const Footer = () => {
-  return <div>Footer</div>;
-};
-
-const AppLayout = () => {
-  return (
-    <div>
-      <Header />
-      <Body />
-      <Footer />
-    </div>
-  );
-};
-
-const Root = ReactDOM.createRoot(document.getElementById("root"));
-
-Root.render(<AppLayout />);
